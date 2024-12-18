@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winter Deals</title>
+    <style>
+        body {
+            margin: 0;
+            overflow-y: auto;
+            font-family: 'Poppins', sans-serif;
+            background-color: #111;
+        }
+
+        .section {
+            position: relative;
+            height: 100vh;
+            background-size: cover;
+            background-position: right;
+            color: #fff;
+            text-align: center;
+        }
+
+        .top-section {
+            background-image: url('image01.jpg');
+        }
+
+        .bottom-section {
+            background-image: url('image02.jpg');
+        }
+
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .section-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .logo {
+            position: absolute;
+            max-width: 350px;
+            height: auto;
+            top: -6%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .winter-sale {
+            font-family: 'Poppins', sans-serif;
+            font-size: 38px;
+            font-weight: 600;
+            color: #a0d1f1;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            top: -28%;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.6), 0px 0px 15px rgba(176, 196, 222, 0.9);
+        }
+
+        .winter-sale:before {
+            content: ❄️";
+            position: absolute;
+            top: -40px;
+            left: 6.5%;
+            font-size: 30px;
+            color: white;
+            animation: snowflakeFadeInOut 1.5s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes snowflakeFadeInOut {
+            0% {
+                opacity: 1;
+                top: -15px;
+            }
+            50% {
+                opacity: 0.5;
+                top: 35px;
+            }
+            100% {
+                opacity: 1;
+                top: -15px;
+            }
+        }
+
+        .snowflakes {
+            position: absolute;
+            top: -0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .snowflake {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: fall 6s linear infinite;
+            opacity: 0.8;
+            z-index: 100;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateX(0) translateY(-100px) rotate(0deg);
+            }
+            50% {
+                transform: translateX(30px) translateY(50vh) rotate(180deg);
+            }
+            100% {
+                transform: translateX(-10px) translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .select-amount {
+            position: absolute;
+            top: 28%;
+            left: 26%;
+            transform: translate(-50%, -50%);
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: gold;
+            text-transform: uppercase;
+            letter-spacing: px;
+            text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.6), 0px 0px 12px rgba(176, 196, 222, 0.9);
+        }
+
+        .shopping-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+            width: 80%;
+            margin: 40px auto;
+            position: absolute;
+            top: 28%;
+            left: 48%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: white;
+        }
+
+        .shopping-item {
+            text-align: center;
+            background-color: rgba(160, 209, 241, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            width: 110px;
+            height: 120px;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .shopping-item.active {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px 5px rgba(176, 196, 222, 0.8);
+        }
+
+        .shopping-item img {
+            max-width: 100%;
+            max-height: 120px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .item-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-top: 8px;
+        }
+
+        .survey-heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 30px;
+            font-weight: 600;
+            color: #a0d1f1;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+            text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.6), 0px 0px 15px rgba(176, 196, 222, 0.9);
+            margin-bottom: 25px;
+            top: -40%;
+        }
+
+        .survey-form {
+            width: 85%;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            position: absolute;
+            top: 19%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .input-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+.payment-channel {
+    width: 89%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    position: absolute;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    text-align: center;
+    color: white;
+}
+
+.payment-methods {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adds space between the images */
+    margin-top: 20px;
+}
+
+.payment-channel img {
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 5px;
+    background-color: #444;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Hover effect */
+.payment-channel img:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    background-color: #555;
+}
+
+
+
+        .selected-item-info {
+            font-size: 18px;
+            color: gold;
+            margin-bottom: 10px;
+        }
+.integrated-footer {
+    margin-top: 20px;
+    color: white;
+    font-size: 14px;
+    text-align: center; /* Align text in the center */
+    line-height: 1.6;
+    padding: 0px 5px; /* Reduce the padding */
+    background-color: transparent;
+    position: absolute;
+    bottom: 0%;
+    width: 89%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: auto; /* You can also set a specific height if needed */
+}
+
+.integrated-footer p {
+    margin: 5px 0;
+}
+
+.integrated-footer .footer-item {
+    margin: 5px 0;
+}
+
+.integrated-footer .footer-item a {
+    color: #a0d1f1;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.integrated-footer .footer-item a:hover {
+    color: #fff;
+}
+
+.integrated-footer .footer-item img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-left: 10px;
+    transition: transform 0.3s;
+}
+
+.integrated-footer .footer-item img:hover {
+    transform: scale(1.2);
+}
+
+
+ </style>
+</head>
+<body>
+
+<!-- Snowflakes Falling in the Background -->
+<div class="snowflakes">
+    <div class="snowflake" style="width: 10px; height: 10px; left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
+    <div class="snowflake" style="width: 15px; height: 15px; left: 30%; animation-duration: 8s; animation-delay: 0s;"></div>
+    <div class="snowflake" style="width: 20px; height: 20px; left: 50%; animation-duration: 7s; animation-delay: 0s;"></div>
+    <div class="snowflake" style="width: 12px; height: 12px; left: 70%; animation-duration: 6s; animation-delay: 0s;"></div>
+    <div class="snowflake" style="width: 14px; height: 14px; left: 90%; animation-duration: 7s; animation-delay: 0s;"></div>
+</div>
+
+<div class="section top-section">
+    <div class="section-content">
+        <img class="logo" src="logo.png" alt="Logo">
+        <p class="winter-sale">WINTER SPECIAL</p>
+        <p class="select-amount">SELECT AMOUNT</p>
+    </div>    
+
+    <div class="shopping-items">
+        <div class="shopping-item" data-price="499" data-name="420UC+180 BONUS UC">
+            <img src="UC.png" alt="Item 1">
+            <p class="item-name">420UC+180 BONUS UC</p>
+        </div>
+        <div class="shopping-item" data-price="799" data-name="720UC+280 BONUS UC">
+            <img src="uc.png" alt="Item 2">
+            <p class="item-name">720UC+280 BONUS UC</p>
+        </div>
+        <div class="shopping-item" data-price="1699" data-name="1600UC+400 BONUS UC">
+            <img src="uc.png" alt="Item 3">
+            <p class="item-name">1600UC+400 BONUS UC</p>
+        </div>
+        <div class="shopping-item" data-price="3499" data-name="3600UC+600 BONUS UC">
+            <img src="uc.png" alt="Item 4">
+            <p class="item-name">3600UC+600 BONUS UC</p>
+        </div>
+        <div class="shopping-item" data-price="5999" data-name="8000UC NO BONUS">
+            <img src="uc.png" alt="Item 5">
+            <p class="item-name">8000UC NO BONUS</p>
+        </div>
+        <div class="shopping-item" data-price="7999" data-name="8000UC+3000 BONUS UC">
+            <img src="uc.png" alt="Item 6">
+            <p class="item-name">8000UC+3000 BONUS UC</p>
+        </div>
+    </div>
+</div>
+
+<div class="section bottom-section">
+    <div class="section-content">
+        <h2 class="survey-heading">ENTER YOUR DETAILS</h2>
+        <div class="survey-form">
+            <label for="game-id" class="input-label">GAME ID</label>
+            <input type="text" id="game-id" name="game-id" placeholder="Enter Game ID">
+
+            <label for="email" class="input-label">EMAIL (OPTIONAL)</label>
+            <input type="email" id="email" name="email" placeholder="Enter Email">
+        </div>
+
+        <!-- Payment Channel -->
+<div class="payment-channel">
+    <div class="selected-item-info">
+        <span id="item-name">None</span> - PRICE: ₹<span id="item-price">0</span>
+    </div>
+
+    <h3 style="color: white; font-size: 20px; margin-bottom: 10px;">CHOOSE PAYMENT METHOD</h3>
+    
+    <!-- Wrapper for payment methods -->
+    <div class="payment-methods">
+        <img src="pp.png" alt="PhonePe" onclick="startPhonePay()">
+        <img src="gpay.png" alt="GPay" onclick="startGooglePay()">
+    </div>
+</div>
+
+
+      <!-- Directly Integrated Footer Content -->
+<div class="integrated-footer">
+    <p style="margin: 10px 0; color: white; font-size: 14px;">
+        <strong>Reach Us:</strong> <br> Email: <a href="mailto:support@winterdeals.com" style="color: #a0d1f1; text-decoration: none;">support@winterdeals.com</a>     </p>
+    <p style="margin: 10px 0; color: white; font-size: 14px;">
+        <strong>Customer Service:</strong> <br>
+        <a href="#" style="color: #a0d1f1; text-decoration: none;">FAQ</a> | 
+        <a href="#" style="color: #a0d1f1; text-decoration: none;"> Policy</a> | 
+        <a href="#" style="color: #a0d1f1; text-decoration: none;"> Information</a>
+    </p>
+    <p style="margin: 10px 0; color: white; font-size: 14px;">
+        <strong>Follow Us:</strong> <br>
+        <a href="#" style="margin-left: 10px;"><img src="facebook.png" alt="Facebook" style="width: 20px;"></a>
+        <a href="#" style="margin-left: 10px;"><img src="twitter.png" alt="Twitter" style="width: 20px;"></a>
+        <a href="#" style="margin-left: 10px;"><img src="insta.png" alt="Instagram" style="width: 20px;"></a>
+    </p>
+</div>
+
+</div>
+
+    </div>
+</div>
+    </div>
+</div>
+
+<script>
+// JavaScript to handle item highlighting and display the name and price of the selected item
+const shoppingItems = document.querySelectorAll('.shopping-item');
+const itemNameDisplay = document.getElementById('item-name');
+const itemPriceDisplay = document.getElementById('item-price');
+
+// Replace with your actual UPI ID
+const upiId = 'saivardh3241@ybl';
+
+let selectedItem = {
+    name: 'None',
+    price: 0
+};
+
+// Handle item selection
+shoppingItems.forEach(item => {
+    item.addEventListener('click', () => {
+        // Remove 'active' class from all items
+        shoppingItems.forEach(i => i.classList.remove('active'));
+
+        // Add 'active' class to the clicked item
+        item.classList.add('active');
+
+        // Get the item name and price from its attributes
+        const name = item.getAttribute('data-name');
+        const price = item.getAttribute('data-price');
+
+        // Update the selected item name and price
+        selectedItem.name = name;
+        selectedItem.price = price;
+
+        // Update the display of the selected item in the payment section
+        itemNameDisplay.textContent = selectedItem.name;
+        itemPriceDisplay.textContent = selectedItem.price;
+
+        // Scroll the page to the bottom section
+        document.querySelector('.bottom-section').scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Function to create a UPI payment URL
+function generateUPIUrl(app, amount) {
+    const baseUrls = {
+        phonepe: `phonepe://pay?pa=${upiId}&pn=Winter%20Deals`,
+        googlepay: `upi://pay?pa=${upiId}&pn=Winter%20Deals`
+    };
+    const params = `&mc=1234&tid=000000000000000000&tr=1234567890&tn=Winter%20Special%20Purchase&am=${amount}&cu=INR`;
+    return baseUrls[app] + params;
+}
+
+// Validate Game ID before proceeding to payment
+function validateSelection() {
+    const gameId = document.getElementById('game-id').value.trim();
+
+    if (!selectedItem.price) {
+        alert('Please select an item to purchase.');
+        return false;
+    }
+
+    if (!gameId) {
+        alert('Please enter your Game ID before proceeding with the payment.');
+        return false;
+    }
+
+    return true;
+}
+
+// Function to handle PhonePe payment
+function startPhonePay() {
+    if (!validateSelection()) return;
+    const url = generateUPIUrl('phonepe', selectedItem.price);
+    redirectToPayment(url);
+}
+
+// Function to handle Google Pay payment
+function startGooglePay() {
+    if (!validateSelection()) return;
+    const url = generateUPIUrl('googlepay', selectedItem.price);
+    redirectToPayment(url);
+}
+
+// Function to redirect to the payment URL
+function redirectToPayment(url) {
+    window.location.href = url;
+ // Redirect to UPI app
+    setTimeout(() => {
+        alert(`You have been redirected to the payment app.\n\nPlease pay ₹${selectedItem.price} to complete the purchase.`);
+    }, 1000);
+}
+
+</script>
+
+
+
+</body>
+</html>
